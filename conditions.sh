@@ -9,11 +9,11 @@ exit 1
 else
 echo "you have root access"
 fi
-dnf install nginx -y
+dnf install mysqkgcxvxmysql -y
 
 if [ $? -eq 0 ]
 then
-echo " install mysqlddddd is succss"
+echo " install mysql is succss"
 else 
 echo "install ysql failure"
 exit 1
