@@ -8,3 +8,4 @@ echo "only root user have the permission"
 else
 echo "you have root access"
 fi
+dnf install nginx -y
