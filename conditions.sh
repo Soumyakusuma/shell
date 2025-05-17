@@ -7,14 +7,19 @@ then
 echo "only root user have the permission"
 exit 1
 else
-echo "you have root access"
+echo "you  have root access"
 fi
-dnf install mysqkgcxvxmysql -y
-
+dnf list installed nginx 
+if [$? -eq 0]
+then
+echo "nginx already installed"
+exit 1
+else
+dnf install nginx  -y
 if [ $? -eq 0 ]
 then
-echo " install mysql is succss"
+echo " install nginxl is succss"
 else 
-echo "install ysql failure"
+echo "install nginx failure"
 exit 1
 fi
