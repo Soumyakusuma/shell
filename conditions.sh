@@ -8,6 +8,7 @@ echo "only root user have the permission"
 exit 1
 else
 echo "you have root access"
+fi
 dnf list installed nginx 
 if [ $? -eq 0 ]
 then
@@ -22,7 +23,7 @@ else
 echo "nginx install is failure"
 fi
 fi
-fi
+
 
 
 
