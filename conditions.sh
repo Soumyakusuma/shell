@@ -9,13 +9,13 @@ exit 1
 else
 echo "you have root access"
 dnf list installed nginx 
-if [$? -eq 0]
+if [ $? -eq 0 ]
 then
 echo "nginx already installed"
 exit 1
 else
-dnf install nginx
-if [ $? eq 0 ]
+dnf install nginx -y
+if [ $? -eq 0 ]
 then 
 echo "nginx install is success"
 else
