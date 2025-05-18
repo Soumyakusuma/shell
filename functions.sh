@@ -1,7 +1,5 @@
 #!/bin/bash
-
 VALIDATE(){
-
 if [ $? -eq 0 ]
 then 
 echo "$2 install is success"
@@ -9,9 +7,7 @@ else
 echo "$2 install is failure"
 fi
 }
-
 userid=$(id -u)
-
 if [ $userid -ne 0 ]
 then
 echo "only root user have the permission"
