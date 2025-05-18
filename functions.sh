@@ -4,9 +4,9 @@ VALIDATE(){
 
 if [ $? -eq 0 ]
 then 
-echo "$1 install is success"
+echo "$2 install is success"
 else
-echo "$1 install is failure"
+echo "$2 install is failure"
 fi
 }
 
@@ -23,7 +23,7 @@ dnf list installed $1
 if [ $? -ne 0 ]
 then
 dnf install $1 -y
-VALIDATE $? $1
+VALIDATE $1 $2
 else
 echo "$1 already installed"
 fi
