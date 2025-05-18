@@ -25,5 +25,4 @@ dnf install $1 -y
 VALIDATE $? $1
 else
 echo "$1 already installed"
-exit 1
 fi
