@@ -30,31 +30,3 @@ fi
 
 
 
-
-if [ $? -ne 0 ]
-dnf install nginx -y
-if [ $? eq 0 ]
-then 
-echo "nginx install is success"
-else
-echo "nginx install is failure"
-
-else
-echo "nginx already installed"
-fi
-fi
-
-if [ $? -eq 0 ]
-then
-echo "nginx already installed"
-exit 1
-else
-dnf install nginx  -y
-if [ $? -eq 0 ]
-then
-echo " install nginxl is succss"
-else 
-echo "install nginx failure"
-exit 1
-fi
-fi
