@@ -7,6 +7,7 @@ then
 echo "$1 install is success"
 else
 echo "$1 install is failure"
+fi
 }
 
 userid=$(id -u)
