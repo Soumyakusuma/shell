@@ -2,7 +2,7 @@
 
 USERID=$(id -u)
 
-logs_path=/var/log/restart
+logs_path=/var/log/
 file_name=$(echo $0 | cut -d "." -f1 )
 mkdir -p $logs_path
 log="$logs_path/$file_name.log"
