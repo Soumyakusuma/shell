@@ -18,19 +18,19 @@ echo "script started at $(date)" $>>$LOG_FILE
 
 if [ $USERID -ne 0 ]
 then
-    echo "ERROR:: Please run this script with root access" $>>$LOG_FILE
+    echo "ERROR:: Please run this script with root access" &>>$LOG_FILE
     exit 1 #give other than 0 upto 127
 else
-    echo "You are running with root access" $>>$LOG_FILE
+    echo "You are running with root access" &>>$LOG_FILE
 fi
 
 # validate functions takes input as exit status, what command they tried to install
 VALIDATE(){
     if [ $1 -eq 0 ]
     then
-        echo "Installing $2 is ... SUCCESS" $>>$LOG_FILE
+        echo "Installing $2 is ... SUCCESS" &>>$LOG_FILE
     else
-        echo "Installing $2 is ... FAILURE" $>>$LOG_FILE
+        echo "Installing $2 is ... FAILURE" &>>$LOG_FILE
         exit 1
     fi
 }
