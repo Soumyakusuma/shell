@@ -6,7 +6,7 @@ logs_path=/var/log/shellscript
 file_name=$(echo 01logs.sh | cut -d "." -f1 )
 
 log="$logs_path/$file_name.log"
-mkdir -p $logs_path
+mkdir -p $logs
 
 echo "script started at $(date)" $>>log
 
