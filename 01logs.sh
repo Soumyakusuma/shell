@@ -9,8 +9,6 @@ log="$logs_path/$file_name.log"
 mkdir -p $logs_path
 
 
-mkdir -p $LOGS_FOLDER
-
 echo "script started at $(date)" $>>$log
 
 if [ $USERID -ne 0 ]
