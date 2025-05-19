@@ -3,7 +3,7 @@
 USERID=$(id -u)
 
 logs_path=/var/log/shellscript
-file_name=$(echo $0 | cut -d "." -f1 )
+file_name=$(echo 01logs.sh | cut -d "." -f1 )
 mkdir -p $logs_path
 log="$logs_path/$file_name.log"
 
