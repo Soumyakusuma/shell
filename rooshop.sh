@@ -2,7 +2,7 @@
 
 AMI_ID="ami-09c813fb71547fc4f"
 SG_ID="sg-06dc2b0cd3ece8e62"
-INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "user" "catalogue" "cart" "shipping" "payment" "dispatch" "frontend")4
+INSTANCES=("mongodb" "frontend" "catalogue" "redis" "mysql" "rabbitmq" "user" "cart" "shipping" "payment" "dispatch" )
 ZONE_ID="Z0349103U6EUQ8TEV3VX"
 DOMAIN_NAME="pract.site"
 
