@@ -13,7 +13,7 @@ then
 echo "please run with root access" | tee -a $LOG_FILE
 exit 1
 else
-echo "you are running withroot access" | tee -a $LOG_FILE
+echo "you are running with root access" | tee -a $LOG_FILE
 fi 
 
 VALIDATE(){
@@ -49,7 +49,7 @@ VALIDATE $? "unzipping file"
 npm install &>>$LOG_FILE
 VALIDATE $? "install packages"
 
-cp $Script_path/catalogue.service /etc/systemd/system/catalogue.service
+cp /$Script_path/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "copying catalogue.service file"
 
 systemctl daemon-reload
@@ -57,7 +57,7 @@ systemctl enable catalogue
 systemctl start catalogue
 VALIDATE $? "load and start catalogue"
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp /$Script_path/mongo.repo /etc/yum.repos.d/mongo.repo
 VALIDATE $? "copy mongo file"
 
 dnf install mongodb-mongosh -y &>>$LOG_FILE
