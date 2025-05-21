@@ -12,7 +12,7 @@ then
 echo "please run with root access" | tee -a $LOG_FILE
 exit 1
 else
-echo "you are running withroot access" | tee -a $LOG_FILE
+echo "you are running with root access" | tee -a $LOG_FILE
 fi 
 
 VALIDATE(){

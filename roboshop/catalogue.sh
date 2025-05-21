@@ -5,6 +5,7 @@ LOGS_FOLDER="/var/log/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 mkdir -p $LOGS_FOLDER
+Script_path=$PWD
 echo "Script started executing at: $(date)" | tee -a $LOG_FILE
 
 if [ $USERID -ne 0 ]
@@ -48,7 +49,7 @@ VALIDATE $? "unzipping file"
 npm install &>>$LOG_FILE
 VALIDATE $? "install packages"
 
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp $Script_path/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "copying catalogue.service file"
 
 systemctl daemon-reload
