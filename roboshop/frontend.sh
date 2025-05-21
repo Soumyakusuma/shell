@@ -23,6 +23,7 @@ VALIDATE(){
  else
  echo "$2 is failure..." | tee -a $LOG_FILE
  fi
+}
 
  dnf module disable nginx -y $>>$LOG_FILE
  VALIDATE $? "disable nginx"
