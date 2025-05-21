@@ -41,6 +41,7 @@ useradd --system --home /app --shell /sbin/nologin --comment "roboshop system us
 VALIDATE $? "create user roboshop"
 else
 echo "roboshop user aready exist"
+fi 
 
 mkdir -p /app 
 VALIDATE $? "create app directory"
