@@ -24,28 +24,28 @@ VALIDATE(){
  echo "$2 is failure..." | tee -a $LOG_FILE
  fi
 
- dnf module disable nginx -y
+ dnf module disable nginx -y $>>$LOG_FILE
  VALIDATE $? "disable nginx"
 
-dnf module enable nginx:1.24 -y
+dnf module enable nginx:1.24 -y $>>$LOG_FILE
 VALIDATE $? "enable nginx"
 
-dnf install nginx -y
+dnf install nginx -y $>>$LOG_FILE
 VALIDATE $? "install nginx"
 
 systemctl enable nginx 
-systemctl start nginx
+systemctl start nginx $>>$LOG_FILE
 VALIDATE $? "enable and start nginx" 
 
-rm -rf /usr/share/nginx/html/* 
+rm -rf /usr/share/nginx/html/*  
 VALIDATE $? "remove older content from html file "
 
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip $>>$LOG_FILE
 VALIDATE $? "download file"
 
 cd /usr/share/nginx/html 
 
-unzip /tmp/frontend.zip
+unzip /tmp/frontend.zip $>>$LOG_FILE
 VALIDATE $? "unzipping the file"
 
 cp /$Script_path/nginx.conf /etc/nginx/nginx.conf
