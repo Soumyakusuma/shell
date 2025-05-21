@@ -1,0 +1,55 @@
+#!/bin/bash
+
+USERID=$(id -u)
+LOGS_FOLDER="/var/log/roboshop-logs"
+SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
+mkdir -p $LOGS_FOLDER
+Script_path=$PWD
+echo "Script started executing at: $(date)" | tee -a $LOG_FILE
+
+if [ $USERID -ne 0 ]
+then
+echo "please run with root access" | tee -a $LOG_FILE
+exit 1
+else
+echo "you are running with root access" | tee -a $LOG_FILE
+fi 
+
+VALIDATE(){
+ if [ $1 -eq 0 ]
+ then
+ echo "$2 is success...." | tee -a $LOG_FILE
+ else
+ echo "$2 is failure..." | tee -a $LOG_FILE
+ fi
+
+ dnf module disable nginx -y
+ VALIDATE $? "disable nginx"
+
+dnf module enable nginx:1.24 -y
+VALIDATE $? "enable nginx"
+
+dnf install nginx -y
+VALIDATE $? "install nginx"
+
+systemctl enable nginx 
+systemctl start nginx
+VALIDATE $? "enable and start nginx" 
+
+rm -rf /usr/share/nginx/html/* 
+VALIDATE $? "remove older content from html file "
+
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+VALIDATE $? "download file"
+
+cd /usr/share/nginx/html 
+
+unzip /tmp/frontend.zip
+VALIDATE $? "unzipping the file"
+
+cp /$Script_path/nginx.conf /etc/nginx/nginx.conf
+VALIDATE $? "copying conf file"
+
+systemctl restart nginx 
+VALIDATE $? "restart nginx"
