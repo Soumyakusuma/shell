@@ -34,7 +34,7 @@ VALIDATE $? "enable nodejs"
 dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "install nodejs"
 
-id roboshop
+id roboshop &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
@@ -52,7 +52,7 @@ VALIDATE $? "download file"
 rm -rf /app/*
 
 cd /app 
-unzip /tmp/catalogue.zip
+unzip /tmp/catalogue.zip &>>$LOG_FILE
 VALIDATE $? "unzipping file"
 
 npm install &>>$LOG_FILE
@@ -72,5 +72,5 @@ VALIDATE $? "copy mongo file"
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "install mongo client"
 
-mongosh --host mongodb.pract.site </app/db/master-data.js
+mongosh --host mongodb.pract.site </app/db/master-data.js &>>$LOG_FILE
 VALIDATE $? "load the data"
