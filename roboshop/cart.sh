@@ -46,24 +46,22 @@ fi
 mkdir -p /app 
 VALIDATE $? "create app directory"
 
-curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip &>>$LOG_FILE
+curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>>$LOG_FILE
 VALIDATE $? "download file"
 
 rm -rf /app/*
 
 cd /app 
-unzip /tmp/user.zip &>>$LOG_FILE
+unzip /tmp/cart.zip &>>$LOG_FILE
 VALIDATE $? "unzipping file"
 
 npm install &>>$LOG_FILE
 VALIDATE $? "install packages"
 
-cp /$Script_path/user.service /etc/systemd/system/user.service
-VALIDATE $? "copying user service"
+cp /$Script_path/cart.service /etc/systemd/system/cart.service
+VALIDATE $? "copying catalogue.service file"
 
 systemctl daemon-reload
-VALIDATE $? "reload the service"
-
-systemctl enable user 
-systemctl start user
-VALIDATE $? "enable and start the user "
+systemctl enable cart 
+systemctl start cart
+VALIDATE $? "load and start catalogue"
