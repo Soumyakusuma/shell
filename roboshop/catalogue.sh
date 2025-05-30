@@ -5,7 +5,7 @@ LOGS_FOLDER="/var/log/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 mkdir -p $LOGS_FOLDER
-Script_path=$PWD
+Script_DIR=$PWD
 echo "Script started executing at: $(date)" | tee -a $LOG_FILE
 
 if [ $USERID -ne 0 ]
@@ -22,6 +22,7 @@ VALIDATE(){
  echo "$2 is success...." | tee -a $LOG_FILE
  else
  echo "$2 is failure..." | tee -a $LOG_FILE
+ exit 1
  fi
 }
 
@@ -58,7 +59,7 @@ VALIDATE $? "unzipping file"
 npm install &>>$LOG_FILE
 VALIDATE $? "install packages"
 
-cp /$Script_path/catalogue.service /etc/systemd/system/catalogue.service
+cp $Script_DIR/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "copying catalogue.service file"
 
 systemctl daemon-reload
@@ -66,11 +67,17 @@ systemctl enable catalogue
 systemctl start catalogue
 VALIDATE $? "load and start catalogue"
 
-cp /$Script_path/mongo.repo /etc/yum.repos.d/mongo.repo
+cp $Script_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 VALIDATE $? "copy mongo file"
 
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "install mongo client"
 
-mongosh --host mongodb.pract.site </app/db/master-data.js &>>$LOG_FILE
-VALIDATE $? "load the data"
+STATUS=$(mongosh --host mongodb.pract.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+if [ $STATUS -lt 0 ]
+then
+    mongosh --host mongodb.daws84s.site </app/db/master-data.js &>>$LOG_FILE
+    VALIDATE $? "Loading data into MongoDB"
+else
+    echo -e "Data is already loaded ... $Y SKIPPING $N"
+fi
