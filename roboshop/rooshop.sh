@@ -18,6 +18,7 @@ IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query "Reservation
 echo "ip address is $IP , $instance"
 fi
 
+
 aws route53 change-resource-record-sets \
     --hosted-zone-id $ZONE_ID \
     --change-batch '
