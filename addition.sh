@@ -7,5 +7,5 @@ then
 echo "$1 is positive number"
 else
 echo "$1 is negative number"
-fi
+
 
